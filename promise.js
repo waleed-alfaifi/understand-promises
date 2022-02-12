@@ -17,13 +17,11 @@ function CustomPromise(executor) {
     // Deals with what's called `one and done operations` which means the value is resolved only once and won't change after it's set
     if (state !== PENDING) return;
 
-    console.log(this);
-
     // If however the promise is pending and the value is not resolved yet, change the promise state and call handlers
     // Because `resolve` is called, that means the promise is fulfilled
     state = FULFILLED;
     value = result;
-    handlers.forEach((h) => h(value));
+    executeHandlers();
   }
 
   function reject(error) {
@@ -34,9 +32,18 @@ function CustomPromise(executor) {
     catches.forEach((c) => c(value));
   }
 
+  function executeHandlers(thenCb) {
+    if (thenCb) {
+      let wow = thenCb(value);
+      console.log(wow);
+    } else {
+      handlers.forEach((h) => h(value));
+    }
+  }
+
   this.then = function (callback) {
     if (state === FULFILLED) {
-      callback(value);
+      executeHandlers(callback);
     } else {
       handlers.push(callback);
     }
