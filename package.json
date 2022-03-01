@@ -1,0 +1,25 @@
+{
+  "name": "understand-promises",
+  "version": "1.0.0",
+  "description": "The main resource for this repo is [Don't Imitate, Understand #2 - Promises, Async, and Await](https://youtu.be/fyGSyqEX2dw) by Tony Alicea.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server . --port=3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waleed-alfaifi/understand-promises.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waleed-alfaifi/understand-promises/issues"
+  },
+  "homepage": "https://github.com/waleed-alfaifi/understand-promises#readme",
+  "dependencies": {
+    "live-server": "^1.2.1",
+    "node-fetch": "^3.2.0"
+  }
+}

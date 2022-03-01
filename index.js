@@ -1,18 +1,35 @@
-// Using native promise!
-// https://youtu.be/fyGSyqEX2dw?t=1679
 const doWork = (res, rej) => {
   setTimeout(() => {
     res({
-      id: "1",
+      id: 1,
       name: "John",
       age: 25,
     });
   }, 1000);
 };
 
-const doOtherWork = (res, rej) => {
+const doOtherWork = (userId) => (res, rej) => {
   setTimeout(() => {
-    res("Done fetching data!");
+    const books = [
+      {
+        id: 1,
+        user: 1,
+        name: "Book 1",
+      },
+      {
+        id: 2,
+        user: 5,
+        name: "Book 2",
+      },
+      {
+        id: 3,
+        user: 1,
+        name: "Book 3",
+      },
+    ];
+
+    const userBooks = books.filter((book) => book.user === userId);
+    res(userBooks);
   }, 1000);
 };
 
@@ -22,14 +39,10 @@ promise1
   .then((value) => {
     console.log("P1, H1: ", value);
 
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        res("Done fetching data!");
-      }, 1000);
-    });
+    return new Promise(doOtherWork(value.id));
   })
   .then((value) => {
-    console.log("P2, H1: " + value);
+    console.log("P2, H1: ", value);
     return "nothing for you";
   })
   .then((value) => {
